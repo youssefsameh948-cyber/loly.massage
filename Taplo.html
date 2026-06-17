@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>رسالتي  ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:#000;
+    position:relative;
+    width: 100vw;
+}
+
+/* شريط الذكريات الخلفي - منع التمرير الأفقي للجسم */
+.memory-strip{
+    position:absolute;
+    top:0;
+    right:0;
+    width:200%;
+    height:100%;
+    display:flex;
+    gap:10px;
+    animation:move 30s linear infinite;
+    opacity:.25;
+    pointer-events: none;
+}
+
+.memory-strip img{
+    width:200px;
+    height:100%;
+    object-fit:cover;
+    filter:brightness(.6);
+}
+
+@keyframes move{
+    0%{transform:translateX(0);}
+    100%{transform:translateX(50%);}
+}
+
+.overlay{
+    position:absolute;
+    width:100%;
+    height:100%;
+    background:linear-gradient(to bottom, rgba(0,0,0,.5), rgba(0,0,0,.85));
+    z-index: 1;
+}
+
+/* الكارت - متجاوب تماماً مع شاشات الموبايل */
+.card{
+    position:relative;
+    z-index:5;
+    width:90%;
+    max-width:380px;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding:25px 20px;
+    border-radius:25px;
+    background:rgba(255,255,255,.11);
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.18);
+    box-shadow:0 20px 50px rgba(0,0,0,.6);
+    text-align:center;
+    color:white;
+}
+
+/* إخفاء شريط التمرير الداخلي */
+.card::-webkit-scrollbar {
+    width: 0px;
+}
+
+.heart{
+    font-size:55px;
+    animation:pulse 1.5s infinite;
+    margin-bottom: 5px;
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.15);}
+    100%{transform:scale(1);}
+}
+
+h2{
+    margin:5px 0 15px 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+input{
+    width:100%;
+    padding:12px;
+    border:none;
+    outline:none;
+    border-radius:12px;
+    text-align:center;
+    margin-top:5px;
+    font-size: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    border:none;
+    border-radius:12px;
+    background:linear-gradient(135deg,#ff2d55,#ff758f);
+    color:white;
+    cursor:pointer;
+    font-size: 15px;
+    transition:.3s;
+    font-weight: 600;
+}
+
+button:hover{
+    transform:scale(1.02);
+}
+
+#counter{
+    margin-top:15px;
+    font-weight:600;
+    font-size: 15px;
+    line-height: 1.6;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 8px;
+    border-radius: 10px;
+}
+
+#message{
+    display:none;
+    margin-top:15px;
+    padding:15px;
+    border-radius:15px;
+    background:rgba(255,255,255,1);
+    color:#222;
+    line-height:1.8;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+#typing{
+    min-height:100px;
+    white-space: pre-line;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: right;
+}
+
+#gallery{
+    display:none;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+    margin-top:15px;
+}
+
+#gallery img{
+    width:100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:12px;
+    transition:.4s;
+}
+
+/* شاشة المفاجأة النهائية */
+#final-screen {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: black;
+    color: white;
+    font-size: 28px;
+    text-align: center;
+    padding: 20px;
+    z-index: 999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+</style>
+</head>
+
+<body>
+
+<div class="memory-strip">
+    <img src="img1.jpg.jpg" alt="ذكريات">
+    <img src="img2.jpg.jpg" alt="ذكريات">
+    <img src="img3.jpg.jpg" alt="ذكريات">
+    <img src="img4.jpg.jpg" alt="ذكريات">
+    <img src="img5.jpg.jpg" alt="ذكريات">
+    <img src="img6.jpg.jpg" alt="ذكريات">
+    <img src="img1.jpg.jpg" alt="ذكريات">
+    <img src="img2.jpg.jpg" alt="ذكريات">
+    <img src="img3.jpg.jpg" alt="ذكريات">
+    <img src="img4.jpg.jpg" alt="ذكريات">
+    <img src="img5.jpg.jpg" alt="ذكريات">
+    <img src="img6.jpg.jpg" alt="ذكريات">
+</div>
+
+<div class="overlay"></div>
+
+<div class="card" id="main-card">
+    <div class="heart">❤️</div>
+    <h2>رسالتي </h2>
+    <input type="password" id="password" placeholder="اكتب كلمة السر">
+    <button onclick="showMessage()">فتح الرسالة</button>
+    <div id="counter"></div>
+
+    <div id="message">
+        <h3 style="color:#ff2d55; margin-bottom: 8px;">🌹 رسالتي 🌹</h3>
+        <p id="typing"></p>
+        <button onclick="showFinal()">🎁 افتح المفاجأة</button>
+    </div>
+
+    <div id="gallery">
+        <img src="img10.jpg.jpg" alt="معرض">
+        <img src="img20.jpg.jpg" alt="معرض">
+        <img src="img30.jpg.jpg" alt="معرض">
+        <img src="img5.jpg.jpg" alt="معرض">
+    </div>
+</div>
+
+<div id="final-screen">
+    <div style="font-size:70px; animation:pulse 1.5s infinite;">❤️</div>
+    <div>
+        بحبك
+        <br><br>
+        و هفضل أحبك
+        <br><br>
+        🌹
+    </div>
+</div>
+
+<script>
+const PASSWORD = "8/7/2024";
+const START_DATE = "2024-07-08";
+
+// تم الحفاظ على نص رسالتك الخاص بالتعديل الجديد
+const LOVE_MESSAGE = "ملناش غير الصور دي بس اكيد هيبجي اليوم اللي هزهق من كتر صورك 😂🤝\nكل خروجه وكل مره شوفتك فيها بالنسبالي هي ذكري حلوه عمري مهنساها.\n\nكل ضحكة،\nكل لحظة،\nكل صوره موجودة هنا ليها مكانة كبيرة في قلبي.";
+
+let typingTimeout;
+
+function showMessage(){
+    let pass = document.getElementById("password").value;
+
+    if(pass === PASSWORD){
+        document.getElementById("message").style.display = "block";
+        document.getElementById("gallery").style.display = "grid";
+        
+        document.getElementById("password").style.display = "none";
+        document.querySelector(".card > button").style.display = "none";
+        
+        startTyping();
+        updateCounter();
+    } else {
+        alert("كلمة السر غير صحيحة");
+    }
+}
+
+function startTyping(){
+    let i = 0;
+    let box = document.getElementById("typing");
+    box.innerHTML = "";
+    clearTimeout(typingTimeout);
+
+    function type(){
+        if(i < LOVE_MESSAGE.length){
+            box.innerHTML += LOVE_MESSAGE.charAt(i);
+            i++;
+            typingTimeout = setTimeout(type, 40);
+        }
+    }
+    type();
+}
+
+function updateCounter(){
+    const start = new Date(START_DATE);
+    const now = new Date();
+    const diff = now - start;
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+    // تعديل صياغة النص لعرض العداد بشكل صحيح ومتناسق
+    document.getElementById("counter").innerHTML = "❤️ مرت " + days + " يوم من أحلى أيام حياتي ❤️";
+}
+
+function showFinal(){
+    document.getElementById("main-card").style.display = "none";
+    document.getElementById("final-screen").style.display = "flex";
+}
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.innerHTML = "❤️";
+    heart.style.position = "fixed";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "-50px";
+    heart.style.fontSize = (15 + Math.random() * 20) + "px";
+    heart.style.zIndex = "1000";
+    heart.style.pointerEvents = "none";
+    
+    document.body.appendChild(heart);
+
+    let pos = -50;
+    const fly = setInterval(() => {
+        pos += 2;
+        heart.style.bottom = pos + "px";
+        heart.style.opacity = 1 - (pos / window.innerHeight);
+
+        if(pos > window.innerHeight){
+            clearInterval(fly);
+            heart.remove();
+        }
+    }, 20);
+}, 700);
+</script>
+
+</body>
+</html>
